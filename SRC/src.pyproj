@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{62186210-e008-4a59-bc38-c0a65a916f5f}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>CuryCue;ContentClasses;GlobalUI;ViewportPickerAndController;ViewportPickerAndController\Common;ContentClasses\VideoClasses;ContentClasses\LaserClasses</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|VisualStudio|TouchDesigner.2021.15240</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="desktop.ini" />
+    <Content Include="foldericon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnimationTimeControl.py" />
+    <Compile Include="ContentClasses\BaseContentClass.py" />
+    <Compile Include="ContentClasses\LaserClasses\LaserMasterClass.py" />
+    <Compile Include="ContentClasses\VideoClasses\VideoProjectorContentClass.py" />
+    <Compile Include="CuryCue\ActiveFloatParsCallBack.py" />
+    <Compile Include="CuryCue\ActiveFloatParsCallBackDat.py" />
+    <Compile Include="CuryCue\callback_cue_list_mode_pars.py" />
+    <Compile Include="CuryCue\CueListUICallbacks.py" />
+    <Compile Include="CuryCue\CuryCueAddByDragAndDrop.py" />
+    <Compile Include="CuryCue\CuryCueClass.py" />
+    <Compile Include="CuryCue\CuryCueConnector.py" />
+    <Compile Include="CuryCue\CuryCueStructsDef.py" />
+    <Compile Include="CuryCue\CuryCueUIClass.py" />
+    <Compile Include="CuryCue\dragdrop.py" />
+    <Compile Include="CuryCue\FixListUICallbacks.py" />
+    <Compile Include="CuryCue\FixParChopCallBack.py" />
+    <Compile Include="CuryCue\FixtureUtils.py" />
+    <Compile Include="CuryCue\InTableEditBase.py" />
+    <Compile Include="CuryCue\MysqlBase.py" />
+    <Compile Include="CuryCue\mysqlexamples.py" />
+    <Compile Include="CuryCue\ParChopCallBack.py" />
+    <Compile Include="CuryCue\QClass.py" />
+    <Compile Include="CuryCue\TableCueOutCallBack.py" />
+    <Compile Include="CuryCue\TableCueParOutCallBack.py" />
+    <Compile Include="CuryCue\TableFixOutCallBack.py" />
+    <Compile Include="CuryCue\TableFixOutCallBackV2.py" />
+    <Compile Include="CuryCue\TableFixParOutCallBack.py" />
+    <Compile Include="CuryCue\Utils.py" />
+    <Compile Include="CuryCue\UtilsClass.py" />
+    <Compile Include="GlobalUI\GlobalUIClass.py" />
+    <Compile Include="GlobalUI\GlobalUIExecuteInitUpdate.py" />
+    <Compile Include="InfoControlBar.py" />
+    <Compile Include="keyframer_export_to_targets.py" />
+    <Compile Include="keyframer_light.py" />
+    <Compile Include="LaserInputClass.py" />
+    <Compile Include="LaserOutputClass.py" />
+    <Compile Include="laser_proj_deviceClass.py" />
+    <Compile Include="MIDIstuff.py" />
+    <Compile Include="OS_ENV_IMPORTER.py" />
+    <Compile Include="projectCompClass.py" />
+    <Compile Include="ProjectorSimClass.py" />
+    <Compile Include="ViewportPickerAndController\ActorsClass.py" />
+    <Compile Include="ViewportPickerAndController\Common\keyboardin_viewport_callbacks.py" />
+    <Compile Include="ViewportPickerAndController\Common\ObjectsPickAndTransform.py" />
+    <Compile Include="ViewportPickerAndController\Common\ObjectsPickAndTransformExecuteInitUpdate.py" />
+    <Compile Include="ViewportPickerAndController\Common\ObjectsPickAndTransformParExec1.py" />
+    <Compile Include="ViewportPickerAndController\Common\renderpick_viewport_callbacks.py" />
+    <Compile Include="ViewportPickerAndController\Common\SceneObjectBase.py" />
+    <Compile Include="ViewportPickerAndController\GlobalLightsClass.py" />
+    <Compile Include="ViewportPickerAndController\LaserGeoClass.py" />
+    <Compile Include="ViewportPickerAndController\MeshObjClassParExec.py" />
+    <Compile Include="ViewportPickerAndController\MeshScreens.py" />
+    <Compile Include="ViewportPickerAndController\ScenographyClass.py" />
+    <Compile Include="ViewportPickerAndController\SmartLightClass.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ContentClasses" />
+    <Folder Include="ContentClasses\LaserClasses" />
+    <Folder Include="ContentClasses\VideoClasses" />
+    <Folder Include="CuryCue" />
+    <Folder Include="GlobalUI" />
+    <Folder Include="ViewportPickerAndController" />
+    <Folder Include="ViewportPickerAndController\Common" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
