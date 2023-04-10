@@ -56,12 +56,12 @@ class CuryCueConnector:
                 myParsFloat = self.LoadDBtoStruct(self.CUEPARFLOAT(), myQuery, raw_row_cue)
                 myParsDictByFixId = dict ()
                 myFixture=self.LocalFixturesByID[myParsFloat.id_fixture]
-                # сшиваем путь для уникального ID поля
+                # stitch the path for the unique field ID
                 myFixturePath=myFixture.global_object_location
                 myParsFloat.full_par_path="{}:{}".format(myFixturePath, myParsFloat.par_name)
                 #
                 myParsFloat.fixture=myFixture
-                # добавляем в общий список параметров ключа 
+                # add to the general list of key parameters
                 myParsList.append(myParsFloat)
                 myParsDict[myParsFloat.full_par_path]=myParsFloat
                 if myParsFloat.id_fixture not in myParsDictByFixId.keys():

@@ -4,8 +4,8 @@ class CuryCueAddByDragAndDrop:
         #     print ("COMP!")
         myItem = info['dragItems']
         if len(myItem) > 0:
-            # TODO на все comp реагировать
-            if type(myItem[0]) == baseCOMP or type(myItem[0]) == geometryCOMP or type(myItem[0]) == containerCOMP:
+            # TODO all kind of ops
+            if isinstance(myItem[0], (baseCOMP, geometryCOMP, containerCOMP)):
                 print("base! name: {}, path: {}".format(
                     myItem[0].name, myItem[0].path))
                 self.AddNewFixture(myItem[0].name, myItem[0].path)
@@ -16,12 +16,12 @@ class CuryCueAddByDragAndDrop:
             elif type(myItem[0] == Par):
                 # self.AddNewFixture(myItem[0].name, myItem[0].path)
                 # print ("name:{}, owner: {}, value: {}".format(myItem[0].name,myItem[0].owner, myItem[0].val))
-                # вызов добавлялки
+                
                 if hasattr(myItem[0], "owner"):
                     self.AddNewFixturePar(
                         myItem[0].owner, myItem[0].name, myItem[0].val[0])
 
-    # добаывлялка нового параметра
+    # new comp par adder
     def AddNewFixturePar(self, path, par_name, par_value):
 
         if self.checkFixtureByPath(path):

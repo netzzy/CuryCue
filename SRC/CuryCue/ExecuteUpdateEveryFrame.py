@@ -15,7 +15,7 @@ def onExit():
 	return
 
 def onFrameStart(frame):
-	if hasattr(op.curycue.ext, "CuryCueClass"): 
+	if hasattr(parent.curycue.ext, "CuryCueClass"): 
 		parent.curycue.UpdateEveryFrame()
 	return
 

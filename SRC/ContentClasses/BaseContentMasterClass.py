@@ -81,7 +81,11 @@ class ContentMasterBase (SceneToggleObject, IOP):
 					setattr(getattr(self.ownerComp.op(dstComp), "par"), parToConnect, " ".join(nodesToConnect))
 					
 		haveOutputs=" ".join(haveOutput.keys())
-		op.contentbar.Pushactive(haveOutputs)
+
+		parentCuryCue=self.ownerComp.par.Parentcurycue
+		sideUIBarOp=op(parentCuryCue).par.Sideui
+		contentBarComp=op(sideUIBarOp).op("ContentSystemBar")
+		contentBarComp.Pushactive(haveOutputs)
 		
 		return 
 		

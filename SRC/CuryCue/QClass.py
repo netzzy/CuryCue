@@ -107,7 +107,7 @@ class QClass:
         for myEvaluator in self.evaluators:
             myEvaluator.isComplete=True
 
-    # вызывается из RunCue
+    # called from RunCue
     def StopByPathIndex(self, full_par_path):
         if full_par_path in self.evaluatorsByPath.keys():
             self.evaluatorsByPath[full_par_path].isComplete=True

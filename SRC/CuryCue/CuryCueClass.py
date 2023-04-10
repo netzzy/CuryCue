@@ -408,9 +408,9 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
             
 #            if (myField.is_fading == 1 or myField.extra_export_frames >= 1) and myField.is_par_enabled:
             
-            # ЕСЛИ ЕСТЬ ТАКОЙ ОБЪЕКТ 
+            
             if hasattr(op(myField.fixture_object_location), "par"):
-                # ЕСЛИ ЕСТЬ ТАКОЙ ПАРАМЕТР
+                
                 if hasattr(op(myField.fixture_object_location).par, myField.par_name):
                     thePar=getattr(op(myField.fixture_object_location).par, myField.par_name)
                     if myField.par_text_value is None or len(myField.par_text_value)==0:
