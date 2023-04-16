@@ -15,6 +15,7 @@ In CuryCue, the cuelist functions in a manner similar to a lighting console's cu
 There's no need to store all parameters within each cue; you can simply record the modifications. The remaining parameters are inherited from prior cues. For example, when you execute a cue with only one altered parameter out of ten, the other nine parameters will be derived from the change history of all preceding cues, starting from the first up to the current one. If a parameter has not been assigned a value in any previous cues, its default value will be utilized (this value is established when you first place the parameter under CuryCue's control and can be adjusted in "Fixture Mode").
 
 CuryCue can operate in three distinct layouts: "Show Layout," "Edit Layout," and "Fixture Layout.". 
+
 You can switch between these layouts using the menu located in the top-right corner, under the "Cue list" menu.
 
 Show Layout: This layout is dedicated to playing your cues when all programming is complete and prepared.
