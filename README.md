@@ -18,5 +18,7 @@ CuryCue can operate in three distinct layouts: "Show Layout," "Edit Layout," and
 You can switch between these layouts using the menu located in the top-right corner, under the "Cue list" menu.
 
 Show Layout: This layout is dedicated to playing your cues when all programming is complete and prepared.
+
 Edit Layout: This layout is designed for programming your cuelist.
+
 Fixture Layout: This layout enables you to modify the components governed by CuryCue.
