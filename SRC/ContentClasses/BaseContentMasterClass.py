@@ -50,15 +50,6 @@ class ContentMasterBase (SceneToggleObject, IOP):
 	def GetActivePresetOutputs(self):
 
 		
-
-		tops1=[]
-		tops2=[]
-		tops3=[]
-		tops4=[]
-		tops5=[]
-		tops6=[]
-		sops=[]
-
 		haveOutput={}
 		for row in self.ownerComp.op("PresetsRoutingTable").rows()[1:]:
 			sourceNode=str(row[0])
@@ -84,11 +75,24 @@ class ContentMasterBase (SceneToggleObject, IOP):
 
 		parentCuryCue=self.ownerComp.par.Parentcurycue
 		sideUIBarOp=op(parentCuryCue).par.Sideui
-		contentBarComp=op(sideUIBarOp).op("ContentSystemBar")
-		contentBarComp.Pushactive(haveOutputs)
+		if op(sideUIBarOp) is not None:
+			contentBarComp=op(sideUIBarOp).op("ContentSystemBar")
+			if contentBarComp is not None:
+				contentBarComp.Pushactive(haveOutputs)
 		
 		return 
-		
+	
+	def GetContentSystemBarWidth(self):
+		parentCuryCue=self.ownerComp.par.Parentcurycue
+		sideUIBarOp=op(parentCuryCue).par.Sideui
+		if op(sideUIBarOp) is not None:
+			contentBarComp=op(sideUIBarOp).op("ContentSystemBar")
+			if contentBarComp is not None:
+				return contentBarComp.par.w
+			
+		return 400
+
+
 	def GetActivePresetNames(self):
 		return ", ".join(self.ActiveList)
 

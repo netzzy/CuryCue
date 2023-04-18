@@ -37,6 +37,7 @@ grid = True
 
 qqModes=dict.fromkeys(['isShowMode', 'isEditMode', 'isFixtureMode'], False)
 qqExport=dict.fromkeys(['no', 'chop', 'vals'], False)
+qqView=dict.fromkeys(['Head', 'Sidepanel', 'Bottom'], False)
 def updateModesDict():
 	i=0
 	global qqModes
@@ -57,7 +58,13 @@ def updateExportModes():
 			qqExport[mode]=False
 		i+=1
 updateExportModes()
+def updateViews():
+	global qqView
+	for mode in qqView.keys():
+		qqView[mode]=bool(getattr(parent.curycueui.par, mode))
+updateViews()
 
+	
 
 def onSavePatch(info):
 	parent.curycueui.dock.BackupSqlDb(None)
@@ -67,9 +74,6 @@ def onReloadCueSystem(info):
 
 def onSaveDb(info, myfilename=None):
 	parent.curycueui.dock.BackupSqlDb(myfilename)
-def loadMysqlFile(file):
-	onSaveDb([], myfilename="toUndo")
-	parent.curycueui.dock.RestoreSqlDb(file)	
 def onSetting(info):
 	"""
 	A menu item callback that works on multiple menu items. The checkboxes in
@@ -89,34 +93,6 @@ def onReload(info):
 	op("topMenu/topMenu/reloadmenu").run()
 
 
-def getRecentFiles(info):
-	"""
-	A rowCallback used in the Top Menu DAT table to automatically generate rows.
-	These callbacks must return a dictionary or list of dictionaries that mimic
-	the columns in the Top Menu DAT. Dictionaries only need the columns with
-	data in them, but must have corresponding columns in the Top Menu DAT in
-	order to be recognized.
-	"""
-	dir_name = project.folder+"/db/"
-	list_of_files = filter( os.path.isfile,
-                        glob.glob(dir_name + '*.sql') )
-	list_of_files = sorted( list_of_files,
-                        key = os.path.getmtime)
-	list_of_files.reverse()
-	files_list=list()
-	i=0
-	for myfile in list_of_files:
-		#(filename, ext)=re.split('\.',myfile)
-		(fullpath, filename)=re.split(r'\\', myfile)
-		(filename, ext)=re.split('\.', filename)
-		
-		files_list.append({'item2':filename})
-		i+=1
-		if i> 3:
-			break
-		
-	return files_list
-
 
 def editTopMenuCallbacks(info):
 	op("/project1/ServerUI/topMenuCallbacksLocal").par.edit.pulse()
@@ -131,9 +107,19 @@ def setQQMode(info):
 	parent.curycueui.I.qqmodeswidget.par.Value0=int(info['index'])
 	updateModesDict()
 def setQQExportMode(info):
-	newExportModeIndex=int(info['index'])-3
+	newExportModeIndex=int(info['index'])
 	parent.curycueui.dock.par.Exportmode=newExportModeIndex
 	updateExportModes()
+def setQQView(info):
+	newModeIndex=int(info['index'])
+	if newModeIndex == 3:
+		parent.curycueui.par.Head^=True
+	elif newModeIndex == 4:
+		parent.curycueui.par.Sidepanel^=True
+	elif newModeIndex == 5:
+		parent.curycueui.par.Bottom^=True
+	updateViews()
+
 # standard menu callbacks
 
 def onSelect(info):

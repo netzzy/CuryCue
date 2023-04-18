@@ -1,18 +1,8 @@
-# callbacks for when associated Panel is being dropped on
+def onDropGetResults(comp, info):
+	parent.curycue.DroppedItem (info)
 
 def onHoverStartGetAccept(comp, info):
-	"""
-	Called when comp needs to know if dragItems are acceptable as a drop.
 
-	Args:
-		comp: the panel component being hovered over
-		info: A dictionary containing all info about hover, including:
-			dragItems: a list of objects being dragged over comp
-			callbackPanel: the panel Component pointing to this callback DAT
-
-	Returns:
-		True if comp can receive dragItems
-	"""
 	#debug('\nonHoverStartGetAccept comp:', comp.path, '- info:\n', info)
 	return True # accept what is being dragged
 
@@ -28,27 +18,6 @@ def onHoverEnd(comp, info):
 	"""
 	#debug('\nonHoverEnd comp:', comp.path, '- info:\n', info)
 
-def onDropGetResults(comp, info):
-	"""
-	Called when comp receives a drop of dragItems. This will only be called if
-	onHoverStartGetAccept has returned True for these dragItems.
-
-	Args:
-		comp: the panel component being dropped on
-		info: A dictionary containing all info about drop, including:
-			dragItems: a list of objects being dropped on comp
-			callbackPanel: the panel Component pointing to this callback DAT
-
-	Returns:
-		A dictionary of results with descriptive keys. Some possibilities:
-			'droppedOn': the object receiving the drop
-			'createdOPs': list of created ops in order of drag items
-			'dropChoice': drop menu choice selected
-			'modified': object modified by drop
-	"""
-	# debug('\nonDropGetResults comp:', comp.path, '- info:\n', info)
-	parent.curycue.DroppedItem (info)
-	# return {'droppedOn': comp}
 
 # callbacks for when associated Panel is being dragged
 

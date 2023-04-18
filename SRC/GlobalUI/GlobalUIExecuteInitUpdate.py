@@ -1,5 +1,5 @@
 def onFrameStart(frame):
-	op.ui.Update()
+	parent.ui.Update()
 	return
 
 def onStart():

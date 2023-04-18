@@ -9,9 +9,9 @@ class InternalClass:
 	def Play(self):
 		self.my.op("T/local/time").par.play=True
 	def Stop(self):
-		self.my.op("local/time").par.play=False
+		self.my.op("T/local/time").par.play=False
 	def PlayOrStop(self):
-		self.my.op("local/time").par.play^=True
+		self.my.op("T/local/time").par.play^=True
 	def Rewind (self):
 		self.SetTimeFrame(1)
 	def getFPS(self):

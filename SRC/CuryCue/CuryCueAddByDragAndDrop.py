@@ -5,7 +5,8 @@ class CuryCueAddByDragAndDrop:
         myItem = info['dragItems']
         if len(myItem) > 0:
             # TODO all kind of ops
-            if isinstance(myItem[0], (baseCOMP, geometryCOMP, containerCOMP)):
+            
+            if isinstance(myItem[0], (TOP, CHOP, DAT, SOP, MAT, COMP)):
                 print("base! name: {}, path: {}".format(
                     myItem[0].name, myItem[0].path))
                 self.AddNewFixture(myItem[0].name, myItem[0].path)

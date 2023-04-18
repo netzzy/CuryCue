@@ -124,6 +124,16 @@ class CuryCueUIClass (UtilsClass):
             else:
                 run("op(\"{}\").allowCooking=False".format(path, cookState), delayFrames=30)
             
+    def GetContentSystemBar(self):
+        sideUi=op(parent.curycueui.dock.par.Sideui)
+        if sideUi is not None:
+            csb=sideUi.op("ContentSystemBar")
+            if csb is not None:
+                iconop=csb.op("ALL_CONTENT_ICONS")
+                if iconop is not None:
+                    return iconop.path
 
+        return ""
+        
 
 

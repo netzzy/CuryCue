@@ -50,7 +50,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         
         pass
 
-    # ИЗМЕНЕНИЕ КЛЮЧА 
+    # CUE CHANGE
     def Storeselected(self, updateDbAfter=True):
         res=None
         myFields = ['id_cue', 'id_fixture', 'par_name',
@@ -68,7 +68,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
                         myFields[3]='par_text_value'
                     newInsertQuery = self.QUERY_INSERT(table="cue_float_data", fields=myFields,
                                                        fieldsData=[int(self.CurrentCueID), int(id_fixture), str(par_name), par_value, float(fade), float(delay)], conditionData=[])
-                    print (newInsertQuery)
+                    print ("{} = {}".format(par_name, par_value))
                     res = self.insertIntoTable(newInsertQuery)
                     
                 i += 1
@@ -108,9 +108,10 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
             if self.ActiveFields[i].full_par_path in cue.pars_float_by_path:
                 # If yes, run the cue.
                 myCue = cue.pars_float_by_path[self.ActiveFields[i].full_par_path]
-                # self.ActiveFields[i].par_value=myCue.par_value
+
                 # If the value has changed in the PO in relation to the active table or if the text in the text field has changed, run the fader.
-                if self.ActiveFields[i].par_value != myCue.par_value or (self.ActiveFields[i].par_text_value != myCue.par_text_value):
+
+                if float(self.ActiveFields[i].par_value) != float(myCue.par_value) or (self.ActiveFields[i].par_text_value != myCue.par_text_value):
                     # Fill in the data structure for the fader.
                     myCueTask = self.q.Qtask(name=myCue.par_name, value_start=self.ActiveFields[i].par_value, value_target=myCue.par_value,
                                             value_text=myCue.par_text_value,
@@ -292,6 +293,8 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
 
         else:
             pass
+    def GetActiveEvaluatorsByPath(self):
+        return self.q.evaluatorsByPath
     def GetActiveEvaluators(self):
         return self.q.evaluators
     def UpdateEveryFrame(self):
@@ -383,7 +386,6 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
             self.lastAddedFixtureIndex=myAddedIndex
             if isSomethingChanged:
                     # We turn off auto-mode completely if a non-fixture-comp mode is selected during addition
-
                 rowsToSelectList=findRowAndMakeList()
                 # rowsToSelectList=
                 # print (rowsToSelectList)
@@ -404,8 +406,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
 
     def ExportCopyAllPars(self):
         for myField in self.ActiveFields:
-            # TODO сделать чтобы отключённые ключи не работали 
-            
+           
 #            if (myField.is_fading == 1 or myField.extra_export_frames >= 1) and myField.is_par_enabled:
             
             

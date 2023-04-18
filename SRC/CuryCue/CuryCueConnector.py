@@ -132,6 +132,8 @@ class CuryCueConnector:
                         if cpc.fixture_par_ref is fixPar:
                             
                             myFix=self.LocalFixturesByID[cpc.id_fixture]
+                            if cpc.par_text_value is None:
+                                cpc.par_text_value='' 
                             myPathFull="{}:{}".format(myFix.global_object_location, cpc.par_name)
                             newPar=self.CUEPARFLOAT(id=-1, par_name=cpc.par_name,par_value=cpc.par_value,par_text_value=cpc.par_text_value, fade_in=cpc.fade_in, delay_in=cpc.delay_in,
                                                    id_fixture=cpc.id_fixture, fixture_name=cpc.fixture_name, fixture_object_location=cpc.fixture_name,
@@ -143,7 +145,7 @@ class CuryCueConnector:
 
                 pass
         #############################################################################
-        # ВЫЧИСЛЯЕМ ПАРАМЕТР С САМЫМ ДЛИННЫМ ФЭЙДОМ И ПРОПИСЫВАЕМ ЕГО В parWithLongestFade
+        # CALCULATING THE PARAMETER WITH THE LONGEST FADE AND WRITING IT INTO parWithLongestFade
         #############################################################################
         # for myCue in self.LocalCueData:
         #     parsTime=dict()
@@ -241,7 +243,8 @@ class CuryCueConnector:
             myField = myQuery.fields[i]
             if re.search("\.", myField):
                 print ("AA!!")
-            #print ("Name: {}, Value: {}".format(myField, myValue))
+            # print ("Name: {}, Value: {}".format(myField, myValue))
+            myValue = '' if myValue is None else myValue
             setattr(myStruct, myField, myValue)
             i += 1
         return myStruct

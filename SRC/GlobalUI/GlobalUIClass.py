@@ -89,6 +89,7 @@ class GlobalUIClass:
 		if isKeys and isInit and isModsOn and isModsOff:
 			if hasattr(op, device):
 				myDevice=getattr(op, device)
+				print (device)
 				print ("Device found {}".format(op(myDevice)))
 # 				print ("Actor to find: {}".format(actor))
 
