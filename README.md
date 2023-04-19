@@ -34,7 +34,7 @@ When you execute a cue with only one altered parameter out of three, the other t
 
 ## Layout
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a3d7742c-56e3-4820-b9bb-510b6ecf692a/Untitled.png)
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa3d7742c-56e3-4820-b9bb-510b6ecf692a%2FUntitled.png?id=7f547135-7ed9-4539-b362-3e41c2e87b24&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
 
 ### Panels
 
