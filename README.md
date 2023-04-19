@@ -12,23 +12,8 @@ The core functionality was developed using Python & SQLite for storing cues & pa
 
 In CuryCue, the cue list functions in a manner similar to a lighting console's cue list. You have fixtures (in this case, TouchDesigner components or nodes) with a variety of parameters, and cues to store the parameter values. There's no need to store all parameters within each cue; you can simply record the modifications. The remaining parameters are inherited from prior cues. 
 
-<aside>
-💡 For example
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F892d3d2c-82fe-4d8e-bbf3-6a9bfed92890%2FScreenshot_2023-04-19_230756.png?id=6a2ca6dc-82fe-4817-acbe-9dbbf0efbb53&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
 
-| Cue name | Stored Par 1 | Stored Par2 | Stored Par3 | Calculated 
-Par1 | Calculated 
-Par2 | Calculated 
-Par3 |
-| --- | --- | --- | --- | --- | --- | --- |
-| Cue 1 | 1 | 0 | 1 | 1 | 0 | 1 |
-| Cue 2 | 0 |  |  | 0 | 0 | 1 |
-| Cue 3 |  | 1 |  | 0 | 1 | 0 |
-| Cue 4 | 1 |  | 1 | 1 | 1 | 1 |
-| Cue 5 |  | 0 |  | 1 | 0 | 1 |
-
-When you execute a cue with only one altered parameter out of three, the other two parameters will be derived from the change history of all preceding cues, starting from the first up to the current one. 
-
-</aside>
 
 # UI basics
 
