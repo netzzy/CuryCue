@@ -4,7 +4,7 @@ class InternalClass:
 
 	def __init__( self ):
 		self.my=me.parent()
-		print ("AnimTimeControl")
+		#print ("AnimTimeControl")
 		return
 	def Play(self):
 		self.my.op("T/local/time").par.play=True

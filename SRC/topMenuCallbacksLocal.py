@@ -11,28 +11,14 @@ def laserDisableOutput(info):
 	pass
 def onMIDIset(info):
 	op("/project1/VideoProjectorContent/sel").openParameters()
-def isProjWindowOpen():
-	return bool(me.ipar.states.Projwindow)
-def isProjWindowOpen2():
-	return bool(me.ipar.states.Projwindow2)
-def isProjWindowOpen3():
-	return bool(me.ipar.states.Projwindow3)
 
 def projWindowSettings(info):
-	op(me.ipar.SetiComp.P2).openParameters()
+	op(me.ipar.SetiComp.P1).openParameters()
 def projWindowSettings1(info):
-	op(me.ipar.SetiComp.P3).openParameters()
+	op(me.ipar.SetiComp.P2).openParameters()
 def projWindowSettings2(info):
-	op(me.ipar.SetiComp.P4).openParameters()
+	op(me.ipar.SetiComp.P3).openParameters()
 
-def onProjBlind(info):
-	if bool(me.ipar.states.Projblind) is not True:
-		op.pproj.op("FREEZER_NULL").lock=True
-		
-		ui.status="The projector output is frozen on the current frame"
-	else: 
-		op.pproj.op("FREEZER_NULL").lock=False
-		ui.status="The projector output is unfrozen"
 def OS_ENV_IMPORTER(info):
 	op.Env.openParameters()
 def Autoprojtoggle(info):
@@ -46,48 +32,36 @@ def onNdiDroidSwitch (info):
 
 def onVCamSwitch (info):
 	op.cam.par.Cam2=int(bool(int(op.cam.par.Cam2))^True)
-def onAdbCam(info):
-	op.ssui.par.Tab=3
-	pass
 def onProjWindow(info):
-	print (me.ipar.SetiComp.P1)
-	if bool(me.ipar.states.Projwindow) is not True:
-		op(me.ipar.SetiComp.P1).par.winopen.pulse()
+	device=op.pproj.op("WALL_PROJ1_WINDOW")
+	state=me.ipar.states.Projwindow
+	if bool(state) is not True:
+		op(device).par.winopen.pulse()
 		ui.status="The projector window is open"
 	else:
-		op(me.ipar.SetiComp.P1).par.winclose.pulse()
+		op(device).par.winclose.pulse()
 		ui.status="The projector window is closed"
 def onProjWindow1(info):
-	print (me.ipar.SetiComp.P2)
-	if bool(me.ipar.states.Projwindow2) is not True:
-		op(me.ipar.SetiComp.P2).par.winopen.pulse()
+	device=op.pproj.op("WALL_PROJ2_WINDOW")
+	state=me.ipar.states.Projwindow2
+	if bool(state) is not True:
+		op(device).par.winopen.pulse()
 		ui.status="The projector window is open"
 	else:
-		op(me.ipar.SetiComp.P2).par.winclose.pulse()
+		op(device).par.winclose.pulse()
 		ui.status="The projector window is closed"
 def onProjWindow2(info):
-	print (me.ipar.SetiComp.P3)
-	if bool(me.ipar.states.Projwindow3) is not True:
-		op(me.ipar.SetiComp.P3).par.winopen.pulse()
+	device=op.pproj.op("LED_OUT_WINDOW")
+	state=me.ipar.states.Projwindow3
+	if bool(state) is not True:
+		op(device).par.winopen.pulse()
 		ui.status="The projector window is open"
 	else:
-		op(me.ipar.SetiComp.P3).par.winclose.pulse()
+		op(device).par.winclose.pulse()
 		ui.status="The projector window is closed"
 
 def onOpenStoner(info):
 	op.pproj.op("stoner").par.Open.pulse()
-	pass
-def onOpenStoner1_1(info):
-	op.pproj.op("stoner2").par.Open.pulse()
-	pass
-def onOpenStoner1_2(info):
-	op.pproj.op("stoner3").par.Open.pulse()
-	pass
-def onOpenStoner2_1(info):
-	op.pproj.op("stoner4").par.Open.pulse()
-	pass
-def onOpenStoner2_2(info):
-	op.pproj.op("stoner5").par.Open.pulse()
 	pass
 
 

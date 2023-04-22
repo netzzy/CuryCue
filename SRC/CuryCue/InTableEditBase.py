@@ -62,7 +62,7 @@ class InTableEditBase:
 
         (exec_status, exec_value) = self.customQuery()
         if exec_status:
-            ui.status = "MySQL record updated in table {}, field {} with ID {} assigned value {}".format(self.fqd['table_name'], self.fqd['col_sql_name'], self.fqd['rec_id'], self.fqd['newValue'])
+            ui.status = "SQLite record updated in table {}, field {} with ID {} assigned value {}".format(self.fqd['table_name'], self.fqd['col_sql_name'], self.fqd['rec_id'], self.fqd['newValue'])
             self.UpdateDb()
         else:
             ui.status = exec_value
