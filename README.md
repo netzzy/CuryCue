@@ -6,7 +6,7 @@ CuryCue is a set of tools for TouchDesigner, focused on managing and controlling
 
 CuryCue is a cue-based control system designed specifically for use within Derivative TouchDesigner with a logic inspired by QLab and lighting consoles. It organizes content into sequential cues, which not only simplifies the process of handing over the show to operators unfamiliar with TouchDesigner but also proves convenient for shows with a clear sequence of events where precise and timely scene transitions are crucial, as opposed to VJ-style performances or similar formats.
 
-The core functionality was developed using Python & SQLite for storing cues & parameters..
+The core functionality was developed using Python & SQLite.
 
 ## Introduction
 
