@@ -147,9 +147,9 @@ class MysqlBase:
                 cursor = self.conn.cursor()
                 
                 try:
-                        print (query)
-                        print ("\n")
-                        print (arguments)
+                        # print (query)
+                        # print ("\n")
+                        # print (arguments)
                         # query=query.replace("%s", "?")
                         cursor.execute(query, arguments)
                         
@@ -157,6 +157,7 @@ class MysqlBase:
                 except :
                         
                         print ("Something went wrong")
+                        ui.status="Something went wrong"
                         return (False, "Something went wrong")
                 return (True, cursor.lastrowid)
 

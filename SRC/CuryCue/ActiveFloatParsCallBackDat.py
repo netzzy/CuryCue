@@ -14,7 +14,8 @@ def onCook(scriptOp):
 		for myPar in parent.curycue.ActiveFields:
 
 			if myPar.par_text_value is None or myPar.par_text_value is not None and len(myPar.par_text_value)==0:
-				myValue=round(myPar.par_value, 4)
+				if not isinstance(myPar.par_value, str):
+					myValue=round(myPar.par_value, 4)
 			else:
 				myValue=myPar.par_text_value
 				

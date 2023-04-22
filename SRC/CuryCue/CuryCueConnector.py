@@ -90,10 +90,19 @@ class CuryCueConnector:
         for myFixture in self.LocalFixtureData:
             for myPars in myFixture.pars:
                 myPathFull="{}:{}".format(myFixture.global_object_location, myPars.par_name)
+                myDefaultValue=0
+                myDefaultValueText=''
+                if isinstance(myPars.default_value, str):
+                    myDefaultValueText=myPars.default_value
+                    myDefaultValue=0
+                else:
+                    myDefaultValueText=''
+                    myDefaultValue=myPars.default_value
+                
                 myField = self.ACTIVE_FIELDS(
                     id_par=myPars.id, id_fixture=myFixture.id, fixture_name=myFixture.name, 
                     fixture_object_location=myFixture.global_object_location, par_name=myPars.par_name,
-                    par_value=myPars.default_value,par_text_value='', is_fixture_enabled=myFixture.is_enabled, 
+                    par_value=myDefaultValue,par_text_value=myDefaultValueText, is_fixture_enabled=myFixture.is_enabled, 
                     fixture_ref=myFixture, fixture_par_ref=myPars, full_par_path=myPathFull, fade_in = myPars.fade_default, 
                     delay_in = myPars.delay_default)
                 # Add fields to list and dictionary for later reference
@@ -132,8 +141,13 @@ class CuryCueConnector:
                         if cpc.fixture_par_ref is fixPar:
                             
                             myFix=self.LocalFixturesByID[cpc.id_fixture]
-                            if cpc.par_text_value is None:
+                                    
+                            if cpc.par_text_value is None or cpc.par_text_value=='None':
                                 cpc.par_text_value='' 
+                            
+                            if cpc.par_value=='None':
+                                cpc.par_value=0
+                            # print ("{}".format(cpc.par_value))
                             myPathFull="{}:{}".format(myFix.global_object_location, cpc.par_name)
                             newPar=self.CUEPARFLOAT(id=-1, par_name=cpc.par_name,par_value=cpc.par_value,par_text_value=cpc.par_text_value, fade_in=cpc.fade_in, delay_in=cpc.delay_in,
                                                    id_fixture=cpc.id_fixture, fixture_name=cpc.fixture_name, fixture_object_location=cpc.fixture_name,
@@ -228,10 +242,20 @@ class CuryCueConnector:
 
             for myPars in myFixture.pars:
                 myPathFull="{}:{}".format(myFixture.global_object_location, myPars.par_name)
+                # print (myPars.default_value)
+                myDefaultValue=0
+                myDefaultValueText=''
+                if isinstance(myPars.default_value, str):
+                    myDefaultValueText=myPars.default_value
+                    myDefaultValue=0
+                else:
+                    myDefaultValueText=''
+                    myDefaultValue=myPars.default_value
+                                
                 myField = self.ACTIVE_FIELDS(
                     id_par=myPars.id, id_fixture=myFixture.id, fixture_name=myFixture.name, 
                     fixture_object_location=myFixture.global_object_location, par_name=myPars.par_name,
-                    par_value=myPars.default_value, is_fixture_enabled=myFixture.is_enabled, 
+                    par_value=myDefaultValue,par_text_value=myDefaultValueText, is_fixture_enabled=myFixture.is_enabled, 
                     fixture_ref=myFixture, fixture_par_ref=myPars, full_par_path=myPathFull)
 
                 self.ActiveFields.append(myField)
@@ -241,8 +265,8 @@ class CuryCueConnector:
         i = 0
         for myValue in raw_row_cue:
             myField = myQuery.fields[i]
-            if re.search("\.", myField):
-                print ("AA!!")
+            # if re.search("\.", myField):
+            #     print ("AA!!")
             # print ("Name: {}, Value: {}".format(myField, myValue))
             myValue = '' if myValue is None else myValue
             setattr(myStruct, myField, myValue)

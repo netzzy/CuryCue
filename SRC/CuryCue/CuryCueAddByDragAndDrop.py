@@ -7,8 +7,8 @@ class CuryCueAddByDragAndDrop:
             # TODO all kind of ops
             
             if isinstance(myItem[0], (TOP, CHOP, DAT, SOP, MAT, COMP)):
-                print("base! name: {}, path: {}".format(
-                    myItem[0].name, myItem[0].path))
+                # print("base! name: {}, path: {}".format(
+                #     myItem[0].name, myItem[0].path))
                 self.AddNewFixture(myItem[0].name, myItem[0].path)
                 self.UpdateFromDb()
                 me.iop.fixparlistrender.cook(force=True)
@@ -38,6 +38,8 @@ class CuryCueAddByDragAndDrop:
                 self.UpdateFromDb()
                 me.iop.fixparlistrender.cook(force=True)
                 self.SetInitCue(1)
+        else:
+            ui.status="Error adding par {}, add COMP {} first!".format(par_name, path)
                 
                 
                 

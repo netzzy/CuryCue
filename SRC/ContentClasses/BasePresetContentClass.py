@@ -15,9 +15,9 @@ class ContentPresetBase (SceneObjectControlBase, IOP):
 		#run('op("{}").Init_on_start_or_clone()'.format(self.ownerComp.path), delayFrames=10)
 		return
 	def Init_on_start_or_clone(self):
-		self.GarbadgeCollect()
+		# self.GarbadgeCollect()
 		self.CheckContentComp()
-		self.Copycustomparup()
+		# self.Copycustomparup()
 
 	# def Disable(self):
 	# 	self.Active=0
@@ -80,7 +80,7 @@ class ContentPresetBase (SceneObjectControlBase, IOP):
 				contentComp=myItem
 			
 		if contentCompSearch.__len__() == 0 or contentCompSearch.__len__() > 1 :
-			ui.status="Err с {} прес., нет content контейнера ({})".format(self.ownerComp.name, contentCompSearch.__len__())
+			ui.status="Err with {} preset., no internal content comp ({})".format(self.ownerComp.name, contentCompSearch.__len__())
 #			return None
 		else: 
 			# меняем имя, есть изменилось
@@ -92,7 +92,7 @@ class ContentPresetBase (SceneObjectControlBase, IOP):
 
 				if self.ownerComp.name!=contentComp.name:
 					contentComp.name=self.ownerComp.name
-					ui.status="Пресет {} переименован".format(self.ownerComp.name)
+					ui.status="Preset {} renamed".format(self.ownerComp.name)
 					return contentComp
 			
 		self.ownerComp.par.Active=self.GetActivePresetNames()

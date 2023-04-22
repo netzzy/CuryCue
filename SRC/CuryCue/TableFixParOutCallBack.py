@@ -17,7 +17,12 @@ def onCook(scriptOp):
 			myDevice=parent.curycue.LocalFixturesByID[int(scriptOp.par.Deviceid)]
 			myPars=myDevice.pars
 			for myPar in myPars:
-				scriptOp.appendRow([myPar.id,myDevice.id, myPar.par_name, "%g" % myPar.default_value,"%g" % myPar.fade_default, "%g" % myPar.delay_default, "%g" % myPar.is_enabled])
+				myValue=0
+				if isinstance(myPar.default_value, str):
+					myValue=myPar.default_value
+				else:
+					myValue="%g" % myPar.default_value
+				scriptOp.appendRow([myPar.id,myDevice.id, myPar.par_name, myValue,"%g" % myPar.fade_default, "%g" % myPar.delay_default, "%g" % myPar.is_enabled])
 	#for fix in parent.curycue.LocalFixtureData:
 	#	scriptOp.appendRow([fix.name, fix.global_object_location])
 

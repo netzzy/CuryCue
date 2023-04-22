@@ -53,7 +53,6 @@ class InTableEditBase:
             if self.customFillKeyData() is False:
                 self.UpdateDb()
                 return
-            print ("ok")
             self.fqd['col_header'] = self.info['colName']
             # print (self.fqd['col_header'])
             self.fqd['col_sql_name'] = self._colHeadersToFields[self.fqd['col_header']]
@@ -208,9 +207,13 @@ class InTableActParEdit (InTableEditBase):
         if self.fqd['col_sql_name'] == "par_value":
             if isinstance(self.fqd['newValue'], str):
                 self.fqd['col_sql_name'] = "par_text_value"
-                print("v: {}, t: {}".format(self.fqd['newValue'], self.fqd['col_sql_name']))
-
-        query = "UPDATE `{}` SET `{}` = ? WHERE {};".format(self.fqd['table_name'], self.fqd['col_sql_name'], "`id` = ?")
+                # print("v: {}, t: {}".format(self.fqd['newValue'], self.fqd['col_sql_name']))
+            else:
+                self.fqd['col_sql_name']="par_text_value=null, par_value"
+                
+                pass 
+        query = "UPDATE `{}` SET {} = ? WHERE {};".format(self.fqd['table_name'], self.fqd['col_sql_name'], "`id` = ?")
+        
         (exec_status, exec_value) = self.qclass.executeUpdateQuery(query, [self.fqd['newValue'], self.fqd['rec_id']])
         return (exec_status, exec_value)
 

@@ -1,4 +1,4 @@
-﻿def onCook(scriptOp):
+def onCook(scriptOp):
 	if hasattr(parent.curycue.ext, "CuryCueClass"): 	
 		scriptOp.clear()
 		
@@ -7,7 +7,9 @@
 			
 			if myPar.par_text_value is None or myPar.par_text_value=='':
 				myChan = scriptOp.appendChan(myPar.full_par_path)
-				myChan[0]=myPar.par_value
+				
+				if not isinstance(myPar.par_value, str):
+					myChan[0]=myPar.par_value
 			else:
 				
 				# IF THERE IS SUCH AN OBJECT
@@ -16,8 +18,12 @@
 					if hasattr(op(myPar.fixture_ref.global_object_location).par, myPar.par_name):
 						theTextPar=getattr(op(myPar.fixture_ref.global_object_location).par, myPar.par_name)
 						if theTextPar!=myPar.par_text_value:
-							setattr(op(myPar.fixture_ref.global_object_location).par,
+							try:
+								setattr(op(myPar.fixture_ref.global_object_location).par,
 									myPar.par_name, myPar.par_text_value)
+							except:
+								ui.status="Invalid export to {}:{}".format(myPar.fixture_ref.global_object_location, myPar.par_name)
+								pass
 
 			pass
 	return

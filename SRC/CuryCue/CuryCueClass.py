@@ -55,7 +55,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         res=None
         myFields = ['id_cue', 'id_fixture', 'par_name',
                     'par_value', 'fade_in', 'delay_in']
-        print (op(self.I.storedat).path)
+        # print (op(self.I.storedat).path)
         if self.CurrentCueID > 0:
             i = 0
             for (id_fixture, par_value, path, par_name, fade, delay) in self.I.storedat.rows():
@@ -66,9 +66,10 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
                     except: 
                         par_value=str(par_value)
                         myFields[3]='par_text_value'
+                        # myFields[3]='par_value'
                     newInsertQuery = self.QUERY_INSERT(table="cue_float_data", fields=myFields,
                                                        fieldsData=[int(self.CurrentCueID), int(id_fixture), str(par_name), par_value, float(fade), float(delay)], conditionData=[])
-                    print ("{} = {}".format(par_name, par_value))
+                    # print ("{} = {}".format(par_name, par_value))
                     res = self.insertIntoTable(newInsertQuery)
                     
                 i += 1
@@ -219,8 +220,8 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
                 if cuePar.id != -1:
                     newCueId=r[1]
                     if newCueId > 0:
-                        print ("id_cue:{}, id_fixture:{}, par_name:{}, par_value:{},par_value_text:{}, fade_in:{}, delay_in:{}".format(myCue.id, cuePar.id_fixture, 
-                        cuePar.par_name, cuePar.par_value,cuePar.par_text_value,  cuePar.fade_in, cuePar.delay_in ))
+                        # print ("id_cue:{}, id_fixture:{}, par_name:{}, par_value:{},par_value_text:{}, fade_in:{}, delay_in:{}".format(myCue.id, cuePar.id_fixture, 
+                        # cuePar.par_name, cuePar.par_value,cuePar.par_text_value,  cuePar.fade_in, cuePar.delay_in ))
                         r1=self.executeUpdateQuery("INSERT INTO cue_float_data (id_cue, id_fixture, par_name, par_value, par_text_value, fade_in, delay_in) VALUES (?, ?, ?,?, ?, ?, ?)",
                         [newCueId, cuePar.id_fixture, cuePar.par_name, cuePar.par_value, cuePar.par_text_value, cuePar.fade_in, cuePar.delay_in])
                         if not r1[0]:
@@ -244,9 +245,9 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         self.SetInitCue(1)
     def CueDelete(self, row):
         row = int(row) - 1
-        print (row)
+        # print (row)
         myCue=self.LocalCueData[row]
-        answer=ui.messageBox('Question', 'Are you sure you want to delete the key {} ({}, id:{}) and all its parameters?'.format(myCue.name, "%g"%myCue.order, myCue.id), buttons=['Да', 'Нет'])
+        answer=ui.messageBox('Question', 'Are you sure you want to delete the key {} ({}, id:{}) and all its parameters?'.format(myCue.name, "%g"%myCue.order, myCue.id), buttons=['Yes', 'No'])
         if answer==0:
             print ("Yes")
             r=self.executeUpdateQuery("DELETE FROM cue_float_data WHERE id_cue=?", [myCue.id]) 
