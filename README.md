@@ -205,4 +205,5 @@ component.
         3. Left + middle mouse buttons: **toggle** between play and stop.
 
 
-**©** [Evgeniy Afonin](https://afonin.media) & [Curiosity Media Lab](https://visualartists.ru)
+[Evgeniy Afonin](https://afonin.media) 
+[Curiosity Media Lab](https://visualartists.ru)
