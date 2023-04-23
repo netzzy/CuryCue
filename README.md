@@ -63,7 +63,10 @@ CuryCue exports parameters in two ways: CHOP export (faster), direct value writi
 
 # CuryCue workflow
 
-In CuryCue there are three primary modes: **Show mode** and **Edit mode** and **Fixture mode**. These modes are designed to suit different phases of the production process. 
+In CuryCue there are three primary modes: **Show mode** and **Edit mode** and **Fixture mode**.  
+These modes are designed to suit different phases of the production process. 
+
+💡 Shortcut to switch between Show/Edit Modes is CTRL+E
 
 1. **Show Mode**: This mode is designed for live performance or real-time cue triggering. In Show mode, users can only execute cues without making any changes to the cue list or individual cues. The interface is simplified, and the focus is on ensuring reliable, accurate cue triggering during the actual show. Key features of Show mode include:
     - Simplified interface for clean execution
