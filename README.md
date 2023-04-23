@@ -1,28 +1,20 @@
-[![IMAGE ALT TEXT HERE](https://i.ytimg.com/an_webp/kxGlQbHNec4/mqdefault_6s.webp?du=3000&sqp=CKLNlKIG&rs=AOn4CLAHIZvhDImSP4Zr9Y0tkhvsA63G5A)
+![IMAGE ALT TEXT HERE](https://i.ytimg.com/an_webp/kxGlQbHNec4/mqdefault_6s.webp?du=3000&sqp=CKLNlKIG&rs=AOn4CLAHIZvhDImSP4Zr9Y0tkhvsA63G5A)
 
 [https://www.youtube.com/watch?v=kxGlQbHNec4](https://www.youtube.com/watch?v=kxGlQbHNec4)
 
-1. **CuryCue**
-    1. Introduction
-        1.1. Overview
-        1.2. CuryCue Logic and Functionality
-    2. User Interface Basics
-        2.1. Layout and Panels
-        2.2. File and Editing Top Menu
-        2.3. Parameters Export Mode
-    3. CuryCue Workflow
-        3.1. Show Mode
-        3.2. Edit Mode
-        3.3. Fixture Mode
-    4. Adding Components and Parameters to CuryCue
-    5. Fixtures Mode
-    6. Edit Mode: Parameters and Cues Management
-    7. Show Mode: Cue Switching and Linked Cues
-2. **Content Preset System (Alpha Version)**
-    1. Architecture's overview 
-    2. Routing system
-    3. Side Panel and Preset's Internal Timelines and UI widgets
-    
+1. **CuryCue**  
+    Introduction  
+    User Interface Basics  
+    CuryCue Workflow  
+    Adding Components and Parameters to CuryCue  
+    Fixtures Mode  
+    Edit Mode: Parameters and Cues Management  
+    Show Mode: Cue Switching and Linked Cues  
+2. **Content Preset System (Alpha Version)**  
+    Architecture's overview   
+    Routing system  
+    Side Panel and Preset's Internal Timelines and UI widgets  
+
 # Introduction
 
 ## Overview
