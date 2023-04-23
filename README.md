@@ -4,25 +4,25 @@
 
 1. **CuryCue**
     1. Introduction
-    1.1. Overview
-    1.2. CuryCue Logic and Functionality
+        1.1. Overview
+        1.2. CuryCue Logic and Functionality
     2. User Interface Basics
-    2.1. Layout and Panels
-    2.2. File and Editing Top Menu
-    2.3. Parameters Export Mode
+        2.1. Layout and Panels
+        2.2. File and Editing Top Menu
+        2.3. Parameters Export Mode
     3. CuryCue Workflow
-    3.1. Show Mode
-    3.2. Edit Mode
-    3.3. Fixture Mode
+        3.1. Show Mode
+        3.2. Edit Mode
+        3.3. Fixture Mode
     4. Adding Components and Parameters to CuryCue
     5. Fixtures Mode
     6. Edit Mode: Parameters and Cues Management
     7. Show Mode: Cue Switching and Linked Cues
 2. **Content Preset System (Alpha Version)**
-    2. Architecture's overview 
-    3. Routing system
-    4. Side Panel and Preset's Internal Timelines and UI widgets
-
+    1. Architecture's overview 
+    2. Routing system
+    3. Side Panel and Preset's Internal Timelines and UI widgets
+    
 # Introduction
 
 ## Overview
