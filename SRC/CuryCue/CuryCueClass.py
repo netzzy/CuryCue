@@ -190,7 +190,9 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
             self.SetOwnerPar('Cueorder', nextCue.order)
             self.SetOwnerPar('Framebind', nextCue.frame_bind)
             op(self.ownerComp.par.Ui).UpdateCueLists(next_cue_index)
-            
+    def SwitchShowEditMode(self):
+        op(self.ownerComp.par.Ui).SwitchShowEditMode()
+
     def AddNewCue (self, order, name):
         if name=='':
             ui.status = "Enter name for new Cue!"

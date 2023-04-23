@@ -101,6 +101,12 @@ class CuryCueUIClass (UtilsClass):
     def SetUIModeEDIT(self):
         self.SetTabActive("editmodeui")
         pass
+    def SwitchShowEditMode(self):
+        currentMode=int(parent.curycueui.I.qqmodeswidget.par.Value0)
+        if currentMode==1:
+            parent.curycueui.I.qqmodeswidget.par.Value0=0
+        else:
+            parent.curycueui.I.qqmodeswidget.par.Value0=1
     def SetTabActive(self, name):
         for tab in self.tabs:
             if tab==name:
