@@ -203,3 +203,7 @@ component.
         1. Left + right mouse buttons: **rewind** to the beginning.
         2. Middle mouse button: **scrub** to a specific point in time.
         3. Left + middle mouse buttons: **toggle** between play and stop.
+
+
+
+© Evgeniy Afonin & Curiosity Media Lab
