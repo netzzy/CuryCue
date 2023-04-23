@@ -127,6 +127,63 @@ Show Mode allows only cue switching, editing cue names or memo fields, and enabl
 
 Switch cues using the Go button, mouse click, hotkeys Right Ctrl + Arrows, or by calling GoNextCue/GoPrevCue methods, e.g., op("/project1/CuryCue").GoNextCue().
 
-The || column field links cues. Double-click to enter 0 or 1. When the longest fade finishes, the next cue triggers. *The ## column can be ignored; it's TBD.*
+The || column field links cues. Double-click to enter 0 or 1. When the longest fade finishes, the next cue triggers. 
 
 ![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F50a8323e-7be7-422d-afcf-6b8e6af432b9%2FUntitled.png?id=fea0ef57-8bce-4627-8d42-671fcb41c13e&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
+
+# Content Preset System (Alpha Version)
+
+The alpha version of **CuryCue's** content preset system is designed as a supplementary tool for specific tasks. Users can choose to utilize this system in conjunction with core **CuryCue** functionality or rely on their preferred content management methods.
+
+### **Here's an overview of the system architecture:**
+
+1. Presets are stored in containers inside /project1/Content or op.vcont. Each preset container should have a "ContentPreset" tag.
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F63b9dd8d-f3e1-49bf-bdf3-9dc41565277e%2FUntitled.png?id=86c2a419-0d50-423b-8bc6-4df414cf6aad&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=1160&userId=&cache=v2)
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F60edc116-2d4e-4387-8518-7b0b136fb4b3%2FUntitled.png?id=6ac23650-9401-44d5-84b9-63cbc56ca712&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=1750&userId=&cache=v2)
+2. Each preset container has an external layer (e.g., Scene1, Calibrate) and an internal layer with the same name as the main layer (e.g., Scene1/Scene1, Calibrate/Calibrate, and so on).
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F60edc116-2d4e-4387-8518-7b0b136fb4b3%2FUntitled.png?id=6ac23650-9401-44d5-84b9-63cbc56ca712&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=1750&userId=&cache=v2)
+3. The external layer is constantly executed and has a set of standard custom parameters: Active, Active fade, and Arming type select .
+4. The internal layer's cooking is disabled to save resources if Arming type = auto and Active fade = 0.
+5. In fact, the cooking/uncooking of the internal layer is controlled by the **Active fade** parameter, while the editable **Active** parameter allows for the addition of extra filtering and other adjustments. The **Arming type** parameter switches between **auto** and **manual**, as users may want the internal layer to be constantly executed. In such cases, the **Armed toggle** controls the cooking/uncooking, and the **Active fade** parameter only manages the actual fading.
+6. Everything that needs to be executed constantly should be in the external layer, while everything that can be uncooked until initialization (controlled by Active/ActiveFade/Armed parameters) should be in the internal layer.
+7. **When the Active fade parameter is greater than 0, the contents of the panel component within the internal layer (for example, Scene1/Scene1) will be displayed in the Side panel interface.**
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F44ff5f6b-d703-4d01-89de-9acc0cfea594%2FUntitled.png?id=decda901-3153-487c-8480-648d8e7b856b&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
+8. The *internal layer* can include a component called "**AnimationTimeControl**" that manages an internal timeline. If present, a widget for controlling and monitoring the preset's timeline will appear in both the Side Panel and the Head Panel of the user interface. For additional details, refer to the corresponding section in the documentation.
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ffbec8f79-be94-414b-966d-2c7d605f82e8%2FUntitled.png?id=7fcce119-35cd-452a-ba8c-6e12fbe122e7&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
+9. Inside every *internal container*, there's a "**LocalPresetClass**" Text DAT that includes a Python class. This allows you to define any required actions during preset initialization, such as rewinding the timeline or resetting certain nodes. You can achieve this by implementing these actions within the **init** constructor, ensuring a seamless and customized setup for your presets that caters to your project's unique needs.
+10. Within the **Content** container, a system is in place that gathers output nodes and routes them via composite nodes, such as Composite TOP, Merge SOP, and Sequence CHOP. The main configuration for this system is called "**PresetsRoutingTable**." For more information, refer to the related section on Routing.
+
+## Routing system
+
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F8becfe56-a7d1-4b34-bcea-827708cc31df%2FUntitled.png?id=fd606a69-73c3-4bbc-aa1e-b7dea6ef60fb&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=1690&userId=&cache=v2)
+
+The routing algorithm in the Content Preset system works as follows:
+
+1. In each container with the **ContentPreset** tag, a node search is performed using the name from the "Preset source" column.
+2. If **ActiveFade** is enabled ( > 0), the path to the node is added to a string, which is then exported to the "**Composite par**" parameter of the "**Composite node.**"
+
+For example, suppose there are two presets named **Scene1** and **Calibrate**. If both are Armed ( & **ActiveFade** > 0), and both have a **PROJ1_OUT** *TOP*, the parameter "**tops**" of the **PROJ1_COMP** node will be assigned a string: "*/project1/Content/Scene1/PROJ1_OUT /project1/Content/Calibrate/PROJ1_OUT*".
+
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Faff3d9ea-b6bb-4794-8664-14a6dac5ec4a%2FUntitled.png?id=3564bec4-8f6d-4ba3-b185-d61e336ee7e2&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
+
+You can collect outputs from your presets with SOP, CHOPs, GEO comps, and more, depending on the architecture of your project. The routing system in the Content Preset system ensures an organized and efficient way to manage multiple output nodes across different presets.
+
+## Side Panel and Preset’s Internal Timelines and UI widgets
+
+![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe9947955-c312-4119-b34a-8687aeb12038%2FUntitled.png?id=1c4115f8-85b9-461e-957d-26afd92c372b&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=2000&userId=&cache=v2)
+
+While in Show Mode with the Side Panel displayed, each preset with an ActiveFade value greater than 0 will present itself as a panel, consisting of:
+
+1. The panel selected from the preset's *internal container*. This is where your custom preset UI will be displayed. **Height, width**, and **Align Order** (*important when multiple presets are enabled*) will be inherited from the original panel within the preset's *internal container*.  
+2. A **time** widget, if your preset’s *internal container* includes an **AnimationTimeControl**
+component.
+    1. The widget displays the status (playing/stand by), current time, current frame, and total duration.
+    2.  ****A red cursor moves within the widget to indicate playback progress.
+        
+        ![Untitled](https://mulberry-sole-9e5.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4dbd10c3-5005-43db-92d7-02e57eef04c1%2FUntitled.png?id=fa640a3a-9e95-4441-a029-06afed39b85f&table=block&spaceId=f21a68da-c563-4b77-b77e-738b4bcf61fc&width=1250&userId=&cache=v2)
+        
+        When hovering over this panel with the mouse cursor, the following **shortcuts** are available:
+        
+        1. Left + right mouse buttons: **rewind** to the beginning.
+        2. Middle mouse button: **scrub** to a specific point in time.
+        3. Left + middle mouse buttons: **toggle** between play and stop.
