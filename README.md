@@ -1,5 +1,3 @@
-![IMAGE ALT TEXT HERE](https://i.ytimg.com/an_webp/kxGlQbHNec4/mqdefault_6s.webp?du=3000&sqp=CKLNlKIG&rs=AOn4CLAHIZvhDImSP4Zr9Y0tkhvsA63G5A)
-
 [https://www.youtube.com/watch?v=kxGlQbHNec4](https://www.youtube.com/watch?v=kxGlQbHNec4)
 
 1. **CuryCue**  
