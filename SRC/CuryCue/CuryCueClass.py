@@ -478,6 +478,20 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         # run('op("{}").FullReloadCuryCue()'.format(self.ownerComp.path), delayFrames=300)
         pass
 
+    def RunCueByName(self, name):
+        cue_found=None
+        cue_found = next((cue for cue in self.LocalCueData if cue.name == name), None)
+
+        if cue_found:
+            self.RunCue(cue_found)
+
+    def RunCueByOrderId(self, name):
+        cue_found=None
+        cue_found = next((cue for cue in self.LocalCueData if cue.order == name), None)
+
+        if cue_found:
+            self.RunCue(cue_found)
+
 
     def CueChangeByRow(self, val):
         self.SetOwnerPar('Cuearrayindex', int(val)-1)
