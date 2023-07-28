@@ -106,6 +106,10 @@ class QClass:
     def Forcestop(self):
         for myEvaluator in self.evaluators:
             myEvaluator.isComplete=True
+    def Forcestop1(self):
+        self.evaluators=[]
+        self.evaluatorsByPath={}
+        
 
     # called from RunCue
     def StopByPathIndex(self, full_par_path):

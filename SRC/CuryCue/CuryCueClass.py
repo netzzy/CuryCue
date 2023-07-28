@@ -103,7 +103,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
     def RunCue(self, cue, momentary=False):
         
         ui.status=("Running CUE: {}, name: {}".format(cue.id, cue.name))
-        self.q.Forcestop()
+        self.q.Forcestop1()
         for i in range(0, len(self.ActiveFields)):
             # Check if there is an active field in the parameters of the called key.
             if self.ActiveFields[i].full_par_path in cue.pars_float_by_path:
@@ -264,6 +264,8 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
 
         pass
 
+    def ForceStop(self):
+        self.q.Forcestop()
     def Reloadsql(self):
         self.LocalCueData = []
         self.LocalCueDataByID = dict()
@@ -483,7 +485,12 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         cue_found = next((cue for cue in self.LocalCueData if cue.name == name), None)
 
         if cue_found:
+            # self.ownerComp.par.Cueid=cue_found.id
             self.RunCue(cue_found)
+        self.SetOwnerPar('Cueid', cue_found.id)
+        self.SetOwnerPar('Cuename', cue_found.name)
+        self.SetOwnerPar('Cueorder', cue_found.order)
+        self.SetOwnerPar('Framebind', cue_found.frame_bind)
 
     def RunCueByOrderId(self, name):
         cue_found=None
@@ -491,6 +498,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
 
         if cue_found:
             self.RunCue(cue_found)
+            self.ownerComp.par.Cueid=cue_found.id
 
 
     def CueChangeByRow(self, val):
