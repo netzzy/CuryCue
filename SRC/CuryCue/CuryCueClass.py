@@ -180,6 +180,10 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         myCueObj=self.LocalCueDataByID[int(self.Curcueid)]
         cur_cue_index=self.LocalCueData.index(myCueObj)
         next_cue_index=cur_cue_index+1 if dir=="forward" else cur_cue_index-1
+
+        if next_cue_index > len(self.LocalCueData)-1 and next_cue_index >=0:
+            # REWIND IF LAST CUE
+            next_cue_index=int(self.ownerComp.par.Rewindcue)
         if not next_cue_index > len(self.LocalCueData)-1 and next_cue_index >=0:
             nextCue=self.LocalCueData[next_cue_index]
             if not self.SKIPCUE:
@@ -190,6 +194,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
             self.SetOwnerPar('Cueorder', nextCue.order)
             self.SetOwnerPar('Framebind', nextCue.frame_bind)
             op(self.ownerComp.par.Ui).UpdateCueLists(next_cue_index)
+
     def SwitchShowEditMode(self):
         op(self.ownerComp.par.Ui).SwitchShowEditMode()
 
@@ -498,7 +503,12 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
 
         if cue_found:
             self.RunCue(cue_found)
-            self.ownerComp.par.Cueid=cue_found.id
+            # self.ownerComp.par.Cueid=cue_found.id
+            self.SetOwnerPar('Cueid', cue_found.id)
+            self.SetOwnerPar('Cuename', cue_found.name)
+            self.SetOwnerPar('Cueorder', cue_found.order)
+            self.SetOwnerPar('Framebind', cue_found.frame_bind)
+
 
 
     def CueChangeByRow(self, val):

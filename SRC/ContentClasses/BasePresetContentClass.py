@@ -34,7 +34,7 @@ class ContentPresetBase (SceneObjectControlBase, IOP):
 		self.Armed=0
 		
 	def Update(self):
-
+		# !!!
 		myContentComp=self.CheckContentComp()
 
 	
@@ -74,7 +74,15 @@ class ContentPresetBase (SceneObjectControlBase, IOP):
 		return 
 	def CheckContentComp(self):
 		contentComp=None
-		contentCompSearch=self.ownerComp.findChildren(tags=['content'])
+		contentCompSearch=[]
+
+		if self.ownerComp.op("findContentOp") is not None:
+			for myItem in self.ownerComp.op("findContentOp").rows()[1:]:
+				contentCompSearch.append(self.ownerComp.op(myItem[0]))
+		else:
+			contentCompSearch=self.ownerComp.findChildren(tags=['content'])
+
+		
 		for myItem in contentCompSearch:
 			if myItem.name==self.ownerComp.name:
 				contentComp=myItem

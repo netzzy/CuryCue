@@ -16,6 +16,7 @@ class ContentMasterBase (SceneToggleObject, IOP):
 			myPreset.par.reinitextensions.pulse()
 		self.SelectDevice()
 		self.PrepareAllPresets(True)
+		self.PresetsRoutingTable = self.ownerComp.op("PresetsRoutingTable").rows()[1:]
 
 
 		return
@@ -107,7 +108,9 @@ class ContentMasterBase (SceneToggleObject, IOP):
 	def Update(self):
 		
 		self.ActiveList=[] 
-		for myPreset in self.ownerComp.findChildren(tags=['ContentPreset']):
+		# for myPreset_ in self.ownerComp.findChildren(tags=['ContentPreset']):
+		for myPreset_ in self.ownerComp.op("FindContentPresets").rows()[1:]:
+			myPreset=self.ownerComp.op(myPreset_[0])
 			myPreset.Update()
 			if myPreset.Armed == 1:
 				self.ActiveList.append(myPreset.name)
