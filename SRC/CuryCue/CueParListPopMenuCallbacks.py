@@ -47,19 +47,19 @@ def onOpen(info):
 		p2_2=1
 
 	v = dict()
-	v["Highlight only already created fields"] = p1_1
-	v["Highlight all fields"] = p1_2
-	v['Fade enabled'] = p2_1
-	v['Fade disabled (for debugging)'] = p2_2
-	v['Auto-switch to the network of the selected device'] = pIsGoto
+	v["Highlight Only Existing Fields"] = p1_1
+	v["Highlight All Fields"] = p1_2
+	v['Fade Enabled'] = p2_1
+	v['Fade Disabled (For Debugging)'] = p2_2
+	v['Auto-Switch to the Network of the Selected Device'] = pIsGoto
 	info['ownerComp'].par.Checkeditems = str(v)
 	dis = []
 	if parent.curycueui.CueListItemRightClicked == -1:
 	    dis = ['Delete 1 field from key']
-	dis.append('Edit fade')
-	dis.append('Edit delay')
-	dis.append('Edit delay')
-	dis.append('Delete all selected')
+	dis.append('Edit Fade')
+	dis.append('Edit Delay')
+	dis.append('Edit Delay')
+	dis.append('Delete All Selected')
 	info['ownerComp'].par.Disableditems = str(dis)
 	
 

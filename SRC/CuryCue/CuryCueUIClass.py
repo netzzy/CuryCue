@@ -29,8 +29,8 @@ class CuryCueUIClass (UtilsClass):
 
     def GoTo(self, data):
         if self.AutoGotoContentComp:
-            ui.panes.current.owner=op(data['rowData']['Путь'])
-            #print (data['rowData']['Путь'])
+            ui.panes.current.owner=op(data['rowData']['Path'])
+            print (data['rowData']['Path'])
     def SetSelectedCue(self, val):
         if self.switchBlockTimes > 10:
             self.switchBlockTimes=False
