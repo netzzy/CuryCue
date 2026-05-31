@@ -31,26 +31,72 @@ class CuryCueUIClass (UtilsClass):
         if self.AutoGotoContentComp:
             ui.panes.current.owner=op(data['rowData']['Path'])
             print (data['rowData']['Path'])
-    def SetSelectedCue(self, val):
-        if self.switchBlockTimes > 10:
-            self.switchBlockTimes=False
 
+    def SelectCueListRow(self, listComp, row):
+        if listComp is None:
+            return False
+
+        if hasattr(listComp.par, "Selectedrows"):
+            listComp.par.Selectedrows="" if row is None else str(row)
+
+        if not self.CheckParentCooking(listComp):
+            return False
+
+        lister=listComp.op("list/lister")
+        if lister is None:
+            return False
+
+        selectRow=getattr(lister, "SelectRow", None)
+        if selectRow is not None:
+            try:
+                selectRow(row)
+                return True
+            except Exception as e:
+                print("SelectRow failed on {}: {}".format(lister.path, e))
+        
+        listerExt=getattr(lister.ext, "ListerExt", None)
+        if listerExt is not None and hasattr(listerExt, "SelectRow"):
+            try:
+                listerExt.SelectRow(row)
+                return True
+            except Exception as e:
+                print("ListerExt.SelectRow failed on {}: {}".format(lister.path, e))
+
+        return False
+
+    def SyncCueListSelection(self, row):
+        for tag in self.CueUILists:
+            listComp=self.ownerComp.findChildren(tags=[tag])
+            if len(listComp)>0:
+                self.SelectCueListRow(op(listComp[0]), row)
+
+    def SyncCurrentCueListSelection(self):
         if not self.cueSwitchBlock:
             self.cueSwitchBlock=True
+            try:
+                self.SyncCueListSelection(int(self.ownerComp.dock.par.Cuearrayindex)+1)
+                self.switchBlockTimes=0
+            finally:
+                self.cueSwitchBlock=False
+
+    def SetSelectedCue(self, val):
+        if self.cueSwitchBlock:
+            self.switchBlockTimes+=1
+            if self.switchBlockTimes > 10:
+                self.switchBlockTimes=0
+                self.cueSwitchBlock=False
+            return
+
+        print (self.cueSwitchBlock)
+        self.cueSwitchBlock=True
+        try:
             # me.iop.cuelist.par.Selectedrows=str(val)
             self.ownerComp.dock.CueChangeByRow(val)
-            for tag in self.CueUILists:
-                listComp=self.ownerComp.findChildren(tags=[tag])
-                # op(listComp.path).op("list")
-                if len(listComp)>0:
-                    if self.CheckParentCooking(op(listComp[0])):
-                        op(listComp[0]).op("list/lister").SelectRow(val)
-                        
-                    # listComp.op("list").SelectRow(val)
-            self.cueSwitchBlock=False
+            self.SyncCueListSelection(val)
             self.switchBlockTimes=0
-        else:
-            self.switchBlockTimes+=1
+        finally:
+            self.cueSwitchBlock=False
+
     def CuesMenuSelector(self, info):
         print (self.CueListItemRightClicked)
         print (info)
@@ -75,12 +121,11 @@ class CuryCueUIClass (UtilsClass):
     def UpdateCueLists(self, ind):
         if not self.cueSwitchBlock:
             self.cueSwitchBlock=True
-            for tag in self.CueUILists:
-                    listComp=self.ownerComp.findChildren(tags=[tag])
-                    if len(listComp)>0:
-                        if self.CheckParentCooking(op(listComp[0])):
-                            op(listComp[0]).op("list/lister").SelectRow(ind+1)
-            self.cueSwitchBlock=False            
+            try:
+                self.SyncCueListSelection(ind+1)
+                self.switchBlockTimes=0
+            finally:
+                self.cueSwitchBlock=False            
 
 
     def SetSelectedInfoFix(self, val):
@@ -117,6 +162,7 @@ class CuryCueUIClass (UtilsClass):
             else:
                 if hasattr(self.I, tab):
                     self.setCompDisplay(tab, False)
+        run("op('{}').SyncCurrentCueListSelection()".format(self.ownerComp.path), delayFrames=1)
 
     def setCompDisplay(self, name, value):
         if hasattr(self.I, name):

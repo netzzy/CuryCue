@@ -300,6 +300,7 @@ class CuryCueClass (CuryCueStructsDef, MysqlBase, CuryCueConnector, UtilsClass, 
         
         if int(self.CurrentCueID) in self.LocalCueDataByID.keys():
             self.RunCue(self.LocalCueDataByID[int(self.CurrentCueID)], momentary=1)
+            
 
         else:
             pass

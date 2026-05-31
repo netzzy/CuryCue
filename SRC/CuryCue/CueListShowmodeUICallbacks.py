@@ -1,7 +1,7 @@
 
 def onSelectRow(info):
-#	print(info)
-	me.parent.curycueui.SetSelectedCue(info['row'])	
+	#print(info)
+	me.parent.curycueui.SetSelectedCue(info['row'])
 	pass
 
 def onEditEnd(info):

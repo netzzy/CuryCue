@@ -20,14 +20,18 @@ class UtilsClass:
                 pass
 
         def CheckParentCooking(self, myOp):
-            allowCooking=True
-            i=0
+            if myOp is None:
+                return False
+            if hasattr(myOp, "allowCooking") and not myOp.allowCooking:
+                return False
+
+            i=1
             while myOp.parent(i) is not None:
-                if not myOp.parent(i).allowCooking:
-                    allowCooking=False
-                    break
+                parentOp=myOp.parent(i)
+                if hasattr(parentOp, "allowCooking") and not parentOp.allowCooking:
+                    return False
                 i+=1
-            return allowCooking
+            return True
 
 
 

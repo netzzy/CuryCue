@@ -1,0 +1,11 @@
+# Normal Mapping
+
+Normal Mapping is the real-time way to add bumps to a surface. It is a lot like Bump Mapping, except the texture map you use to describe the surface detail is different. A Bump Map is normally a gray scale image where the bright spots are the peaks and the dark areas are the valleys on the surface. A normal map is a texture where every pixel is a normal vector, describing the Up direction of the surface at that point. A bump map can be converted into a normal map using the [Normal Map TOP](<./Normal_Map_TOP.md> "Normal Map TOP"). There are other tools such as nvidia's Normal Map Plug-in for Photoshop [Located Here](<http://developer.nvidia.com/object/photoshop_dds_plugins.html>) that can also do this. Essentially, a normal map describes the normal for every pixel on the surface of a geometry, which is far more detail than you can get from point normals.   
+  
+A normal is a vector in 3D space. The values of each component of the vector can range from -1 to 1. When looking at a normal map, up is +Y, down is -Y, left is -X and right is +X. +Z is coming out of the image and -Z is going into the image. So if you are looking at a bump on the image, the left side of the bump will have a negative X value, the bottom of the bump will have a -Y value and so on. 
+
+One catch however is that while normal vector values range from -1 to 1, the values in a 8-bit texture can only range from 0 to 1. Because of this, the normal vector values are offset in the normal map to fit in the 0-1 range. -1 becomes 0, 0 becomes 0.5 and 1 becomes 1. So for example a value in a normal map of (0.5, 0.5, 1.0) corresponds to a vector of (0,0,1). Similarly a value of (0.5, 1.0, 0) in the normal map corresponds to a vector of (0, 1, -1). The majority of normals on a surface will be pointing up off of the surface, so most of them will be close to (0.5, 0.5, 1). This is why normal maps always look blueish. 
+
+To use normal mapping, you need to create tangents (attribute T[4]) on your geometry. This is done with the [Attribute Create SOP](<./Attribute_Create_SOP.md> "Attribute Create SOP"). 
+
+For a more in-depth explanation of how normal maps and tangents are used to create the look of bumps on geometry, refer to the Tangent Space Normal Mapping article.
